@@ -1,11 +1,10 @@
 <template>
   <div id="app">
     <header>
-      <span>Vue.js PWA</span>
+      <span>PitchScore</span>
     </header>
     <main>
-      <img src="./assets/logo.png" alt="Vue.js PWA">
-      <router-view></router-view>
+      <router-view :players="players" v-on:addPlayer="addPlayer"></router-view>
     </main>
   </div>
 </template>
@@ -25,6 +24,11 @@ export default {
   name: 'app',
   firebase: {
     players
+  },
+  methods: {
+    addPlayer: function (newPlayer) {
+      players.push(newPlayer)
+    }
   }
 }
 </script>
@@ -42,8 +46,7 @@ body {
 }
 
 main {
-  text-align: center;
-  margin-top: 40px;
+  margin: 40px 40px 0;
 }
 
 header {
