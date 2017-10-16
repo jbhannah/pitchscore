@@ -11,8 +11,21 @@
 </template>
 
 <script>
+import Firebase from 'firebase'
+
+const config = {
+  databaseURL: 'https://pitch-score.firebaseio.com'
+}
+
+const app = Firebase.initializeApp(config)
+const db = app.database()
+const players = db.ref('players')
+
 export default {
-  name: 'app'
+  name: 'app',
+  firebase: {
+    players
+  }
 }
 </script>
 
