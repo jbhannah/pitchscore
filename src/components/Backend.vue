@@ -13,6 +13,12 @@
 
     <form id="addPlayer" v-on:submit.prevent="addPlayer">
       <input type="text" v-model="newPlayer.name" placeholder="Name" />
+      <select v-model="newPlayer.carColor">
+        <option v-for="carColor in carColors" :value="carColor">{{ carColor[0].toUpperCase() + carColor.slice(1) }}</option>
+      </select>
+      <select v-model="newPlayer.stickerColor">
+        <option v-for="stickerColor in stickerColors" :value="stickerColor">{{ stickerColor[0].toUpperCase() + stickerColor.slice(1) }}</option>
+      </select>
       <button type="submit">Add</button>
     </form>
   </div>
@@ -20,6 +26,23 @@
 
 <script>
 import Player from '@/components/Player'
+
+const carColors = [
+  'black',
+  'blue',
+  'green',
+  'orange',
+  'pink',
+  'red',
+  'yellow',
+  'white'
+]
+
+const stickerColors = [
+  'black',
+  'pink',
+  'white'
+]
 
 export default {
   name: 'backend',
@@ -32,6 +55,8 @@ export default {
 
     return {
       blankPlayer,
+      carColors,
+      stickerColors,
       newPlayer: Object.assign({}, blankPlayer)
     }
   },
