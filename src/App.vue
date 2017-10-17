@@ -7,6 +7,7 @@
       <router-view
         v-on:addPlayer="addPlayer"
         v-on:deletePlayer="deletePlayer"
+        v-on:resetData="resetData"
         :players="players" />
     </main>
   </div>
@@ -34,6 +35,9 @@ export default {
     },
     deletePlayer: function (key) {
       players.child(key).remove()
+    },
+    resetData: function () {
+      players.set([])
     }
   }
 }

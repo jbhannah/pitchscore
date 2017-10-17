@@ -21,6 +21,8 @@
       </select>
       <button type="submit">Add</button>
     </form>
+
+    <button type="button" v-on:click="resetData">Reset Data</button>
   </div>
 </template>
 
@@ -73,6 +75,10 @@ export default {
     },
     deletePlayer: function (key) {
       this.$emit('deletePlayer', key)
+    },
+    resetData: function () {
+      if (!confirm('Are you sure?')) { return }
+      this.$emit('resetData')
     }
   },
   components: { Player }
