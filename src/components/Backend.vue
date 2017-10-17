@@ -12,11 +12,11 @@
     </ul>
 
     <form id="addPlayer" v-on:submit.prevent="addPlayer">
-      <input type="text" v-model="newPlayer.name" placeholder="Name" />
-      <select v-model="newPlayer.carColor">
+      <input type="text" id="name" placeholder="Name" v-model="newPlayer.name" :class="{ error: !validation.name }" />
+      <select v-model="newPlayer.carColor" :class="{ error: !validation.carColor }">
         <option v-for="carColor in carColors" :value="carColor">{{ carColor[0].toUpperCase() + carColor.slice(1) }}</option>
       </select>
-      <select v-model="newPlayer.stickerColor">
+      <select v-model="newPlayer.stickerColor" :class="{ error: !validation.stickerColor }">
         <option v-for="stickerColor in stickerColors" :value="stickerColor">{{ stickerColor[0].toUpperCase() + stickerColor.slice(1) }}</option>
       </select>
       <button type="submit">Add</button>
@@ -68,10 +68,20 @@ export default {
       required: true
     }
   },
+  computed: {
+    validation: function () {
+      return {
+        name: !!this.newPlayer.name.trim(),
+        carColor: !!this.newPlayer.carColor.trim(),
+        stickerColor: !!this.newPlayer.stickerColor.trim()
+      }
+    }
+  },
   methods: {
     addPlayer: function () {
       this.$emit('addPlayer', this.newPlayer)
       this.newPlayer = Object.assign({}, this.blankPlayer)
+      document.getElementById('name').focus()
     },
     deletePlayer: function (key) {
       this.$emit('deletePlayer', key)
@@ -86,5 +96,7 @@ export default {
 </script>
 
 <style>
-
+.error {
+  border: 1px solid red;
+}
 </style>
