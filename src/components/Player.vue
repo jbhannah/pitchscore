@@ -40,14 +40,14 @@ export default {
   border-radius: 50%;
 }
 
-.puck.black  { background-color: black;  }
-.puck.blue   { background-color: blue;   }
-.puck.green  { background-color: green;  }
-.puck.orange { background-color: orange; }
-.puck.pink   { background-color: pink;   }
-.puck.red    { background-color: red;    }
-.puck.yellow { background-color: yellow; }
-.puck.white  { background-color: white;  }
+.puck.black  { background-color: black; }
+.puck.blue   { background-color: mediumblue; }
+.puck.green  { background-color: green; }
+.puck.orange { background-color: darkorange; }
+.puck.pink   { background-color: lightpink; }
+.puck.red    { background-color: red; }
+.puck.yellow { background-color: gold; }
+.puck.white  { background-color: antiquewhite; }
 
 .sticker {
   width: 70%;
@@ -56,6 +56,6 @@ export default {
 }
 
 .sticker.black path { fill: black; }
-.sticker.pink  path { fill: pink;  }
+.sticker.pink  path { fill: hotpink; }
 .sticker.white path { fill: white; }
 </style>
