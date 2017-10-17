@@ -3,7 +3,12 @@
     <h1>Backend</h1>
 
     <ul>
-      <li v-for="player in players">{{ player.name }}</li>
+      <Player
+        v-for="player in players"
+        v-on:deletePlayer="deletePlayer"
+        :has-buttons="true"
+        :key="player['.key']"
+        :player="player" />
     </ul>
 
     <form id="addPlayer" v-on:submit.prevent="addPlayer">
@@ -14,6 +19,8 @@
 </template>
 
 <script>
+import Player from '@/components/Player'
+
 export default {
   name: 'backend',
   data () {
@@ -35,8 +42,12 @@ export default {
     addPlayer: function () {
       this.$emit('addPlayer', this.newPlayer)
       this.newPlayer = Object.assign({}, this.blankPlayer)
+    },
+    deletePlayer: function (key) {
+      this.$emit('deletePlayer', key)
     }
-  }
+  },
+  components: { Player }
 }
 </script>
 

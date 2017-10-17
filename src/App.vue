@@ -4,7 +4,10 @@
       <span>PitchScore</span>
     </header>
     <main>
-      <router-view :players="players" v-on:addPlayer="addPlayer"></router-view>
+      <router-view
+        v-on:addPlayer="addPlayer"
+        v-on:deletePlayer="deletePlayer"
+        :players="players" />
     </main>
   </div>
 </template>
@@ -28,6 +31,9 @@ export default {
   methods: {
     addPlayer: function (newPlayer) {
       players.push(newPlayer)
+    },
+    deletePlayer: function (key) {
+      players.child(key).remove()
     }
   }
 }
