@@ -61,7 +61,10 @@ export default {
     }
   },
   props: {
-    players: Array
+    players: {
+      type: Array,
+      required: true
+    }
   },
   methods: {
     addPlayer: function () {
