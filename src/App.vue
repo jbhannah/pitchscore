@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <header>
-      <span>PitchScore</span>
+      <span><router-link to="/" exact>PitchScore</router-link></span>
+      <router-link to="backend">Backend</router-link>
     </header>
     <main>
       <router-view
@@ -68,7 +69,7 @@ header {
 }
 
 header span {
-  display: block;
+  display: inline-block;
   position: relative;
   font-size: 20px;
   line-height: 1;
@@ -76,5 +77,14 @@ header span {
   font-weight: 400;
   box-sizing: border-box;
   padding-top: 16px;
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+header .router-link-active {
+  font-weight: 600;
 }
 </style>

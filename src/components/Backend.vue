@@ -1,5 +1,5 @@
 <template>
-  <div class="backend">
+  <div id="backend">
     <h1>Backend</h1>
 
     <ul>
