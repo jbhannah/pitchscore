@@ -5,6 +5,9 @@
     </span>
     {{ player.name }}
     <button type="button" v-if="hasButtons" v-on:click="deletePlayer">🗑</button>
+    <button type="button" v-if="hasButtons && (player.laps || []).length > 0" v-on:click="playerUnfinishedLap">⬅️</button>
+    {{ player.laps }}
+    <button type="button" v-if="hasButtons && (player.laps || []).length < 3" v-on:click="playerFinishedLap">➡️</button>
   </li>
 </template>
 
@@ -26,6 +29,12 @@ export default {
   methods: {
     deletePlayer: function () {
       this.$emit('deletePlayer', this.player['.key'])
+    },
+    playerFinishedLap: function () {
+      this.$emit('playerFinishedLap', this.player['.key'])
+    },
+    playerUnfinishedLap: function () {
+      this.$emit('playerUnfinishedLap', this.player['.key'])
     }
   },
   components: { Vector }

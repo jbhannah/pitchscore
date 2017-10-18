@@ -8,6 +8,8 @@
       <router-view
         v-on:addPlayer="addPlayer"
         v-on:deletePlayer="deletePlayer"
+        v-on:playerFinishedLap="playerFinishedLap"
+        v-on:playerUnfinishedLap="playerUnfinishedLap"
         v-on:resetData="resetData"
         :players="players" />
     </main>
@@ -31,11 +33,44 @@ export default {
     players: playersRef
   },
   methods: {
+    findPlayerByKey: function (key) {
+      return this.players.find((p) => p['.key'] === key)
+    },
     addPlayer: function (newPlayer) {
       playersRef.push(newPlayer)
     },
     deletePlayer: function (key) {
+      const player = this.findPlayerByKey(key)
+      const laps = player.laps.length
+
+      for (let i = 0; i < laps; i++) { this.playerUnfinishedLap(key) }
+
       playersRef.child(key).remove()
+    },
+    playerFinishedLap: function (key) {
+      const player = this.findPlayerByKey(key)
+      let laps = player.laps || []
+      const lap = laps.length
+      const place = Math.max(...this.players.map((p) => (p.laps || [])[lap] || 0)) + 1
+
+      laps.push(place)
+
+      playersRef.child(key).update({ laps })
+    },
+    playerUnfinishedLap: function (key) {
+      let laps = this.findPlayerByKey(key).laps || []
+      const place = laps.pop()
+      if (typeof place === 'undefined') { return }
+
+      const lap = laps.length
+      playersRef.child(key).update({ laps })
+
+      this.players.forEach((player) => {
+        if (player['.key'] === key || (player.laps || []).length <= lap || player.laps[lap] < place) { return }
+        let laps = player.laps
+        laps[lap] = laps[lap] - 1
+        playersRef.child(player['.key']).update({ laps })
+      })
     },
     resetData: function () {
       playersRef.set([])

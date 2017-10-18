@@ -6,6 +6,8 @@
       <Player
         v-for="player in players"
         v-on:deletePlayer="deletePlayer"
+        v-on:playerFinishedLap="playerFinishedLap"
+        v-on:playerUnfinishedLap="playerUnfinishedLap"
         :has-buttons="true"
         :key="player['.key']"
         :player="player" />
@@ -52,14 +54,15 @@ export default {
     const blankPlayer = {
       name: '',
       carColor: '',
-      stickerColor: ''
+      stickerColor: '',
+      laps: []
     }
 
     return {
       blankPlayer,
       carColors,
-      stickerColors,
-      newPlayer: Object.assign({}, blankPlayer)
+      newPlayer: Object.assign({}, blankPlayer),
+      stickerColors
     }
   },
   props: {
@@ -85,6 +88,12 @@ export default {
     },
     deletePlayer: function (key) {
       this.$emit('deletePlayer', key)
+    },
+    playerFinishedLap: function (key) {
+      this.$emit('playerFinishedLap', key)
+    },
+    playerUnfinishedLap: function (key) {
+      this.$emit('playerUnfinishedLap', key)
     },
     resetData: function () {
       if (!confirm('Are you sure?')) { return }
