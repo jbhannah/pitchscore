@@ -23,22 +23,22 @@ const config = {
 
 const app = Firebase.initializeApp(config)
 const db = app.database()
-const players = db.ref('players')
+const playersRef = db.ref('players')
 
 export default {
   name: 'app',
   firebase: {
-    players
+    players: playersRef
   },
   methods: {
     addPlayer: function (newPlayer) {
-      players.push(newPlayer)
+      playersRef.push(newPlayer)
     },
     deletePlayer: function (key) {
-      players.child(key).remove()
+      playersRef.child(key).remove()
     },
     resetData: function () {
-      players.set([])
+      playersRef.set([])
     }
   }
 }
