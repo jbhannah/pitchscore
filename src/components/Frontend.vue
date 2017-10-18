@@ -1,8 +1,8 @@
 <template>
   <div id="frontend">
-    <ul>
+    <table>
       <Player v-for="player in players" :key="player['.key']" :player="player" />
-    </ul>
+    </table>
   </div>
 </template>
 

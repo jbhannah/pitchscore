@@ -1,14 +1,24 @@
 <template>
-  <li class="player">
-    <span class="puck" :class="player.carColor">
-      <Vector class="sticker" :src="require('@/assets/sticker.svg')" :class="player.stickerColor" />
-    </span>
-    {{ player.name }}
-    <button type="button" v-if="hasButtons" v-on:click="deletePlayer">🚫</button>
-    <button type="button" v-if="hasButtons && (player.laps || []).length > 0" v-on:click="playerUnfinishedLap">⏪</button>
-    {{ player.laps }}
-    <button type="button" v-if="hasButtons && (player.laps || []).length < 3" v-on:click="playerFinishedLap">⏩</button>
-  </li>
+  <tr class="player">
+    <td>
+      <span class="puck" :class="player.carColor">
+        <Vector class="sticker" :src="require('@/assets/sticker.svg')" :class="player.stickerColor" />
+      </span>
+    </td>
+    <td>
+      {{ player.name }}
+    </td>
+    <td v-if="hasButtons">
+      <button type="button" v-if="hasButtons" v-on:click="deletePlayer">🚫</button>
+    </td>
+    <td v-if="hasButtons">
+      <button type="button" v-if="hasButtons && (player.laps || []).length > 0" v-on:click="playerUnfinishedLap">⏪</button>
+    </td>
+    <td v-for="pos in player.laps">{{ pos }}</td>
+    <td v-if="hasButtons">
+      <button type="button" v-if="hasButtons && (player.laps || []).length < 3" v-on:click="playerFinishedLap">⏩</button>
+    </td>
+  </tr>
 </template>
 
 <script>
@@ -41,7 +51,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+td {
+  min-width: 2rem;
+}
+
 .puck {
   display: inline-block;
   width: 2rem;

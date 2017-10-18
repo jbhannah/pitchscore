@@ -2,7 +2,7 @@
   <div id="backend">
     <h1>Backend</h1>
 
-    <ul>
+    <table>
       <Player
         v-for="player in players"
         v-on:deletePlayer="deletePlayer"
@@ -11,7 +11,7 @@
         :has-buttons="true"
         :key="player['.key']"
         :player="player" />
-    </ul>
+    </table>
 
     <form id="addPlayer" v-on:submit.prevent="addPlayer">
       <input type="text" id="name" placeholder="Name" v-model="newPlayer.name" :class="{ error: !validation.name }" />
