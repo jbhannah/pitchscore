@@ -74,9 +74,9 @@ export default {
   computed: {
     validation: function () {
       return {
-        name: !!this.newPlayer.name.trim(),
-        carColor: !!this.newPlayer.carColor.trim(),
-        stickerColor: !!this.newPlayer.stickerColor.trim()
+        name: !!this.newPlayer.name.trim() || (!this.newPlayer.carColor.trim() && !this.newPlayer.stickerColor.trim()),
+        carColor: !!this.newPlayer.carColor.trim() || (!this.newPlayer.name.trim() && !this.newPlayer.stickerColor.trim()),
+        stickerColor: !!this.newPlayer.stickerColor.trim() || (!this.newPlayer.name.trim() && !this.newPlayer.carColor.trim())
       }
     }
   },
