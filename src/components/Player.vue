@@ -4,10 +4,10 @@
       <Vector class="sticker" :src="require('@/assets/sticker.svg')" :class="player.stickerColor" />
     </span>
     {{ player.name }}
-    <button type="button" v-if="hasButtons" v-on:click="deletePlayer">🗑</button>
-    <button type="button" v-if="hasButtons && (player.laps || []).length > 0" v-on:click="playerUnfinishedLap">⬅️</button>
+    <button type="button" v-if="hasButtons" v-on:click="deletePlayer">🚫</button>
+    <button type="button" v-if="hasButtons && (player.laps || []).length > 0" v-on:click="playerUnfinishedLap">⏪</button>
     {{ player.laps }}
-    <button type="button" v-if="hasButtons && (player.laps || []).length < 3" v-on:click="playerFinishedLap">➡️</button>
+    <button type="button" v-if="hasButtons && (player.laps || []).length < 3" v-on:click="playerFinishedLap">⏩</button>
   </li>
 </template>
 
