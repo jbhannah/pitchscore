@@ -41,7 +41,7 @@ export default {
     },
     deletePlayer: function (key) {
       const player = this.findPlayerByKey(key)
-      const laps = player.laps.length
+      const laps = (player.laps || []).length
 
       for (let i = 0; i < laps; i++) { this.playerUnfinishedLap(key) }
 
