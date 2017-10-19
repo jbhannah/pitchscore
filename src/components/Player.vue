@@ -19,6 +19,7 @@
     </td>
     <td v-if="hasButtons && (player.laps || []).length < 3">
       <button type="button" v-on:click="playerFinishedLap">⏩</button>
+      <button type="button" v-on:click="playerTiedLap" v-if="(player.laps || []).length > 0">🔀</button>
     </td>
   </tr>
 </template>
@@ -44,6 +45,9 @@ export default {
     },
     playerFinishedLap: function () {
       this.$emit('playerFinishedLap', this.player['.key'])
+    },
+    playerTiedLap: function () {
+      this.$emit('playerFinishedLap', this.player['.key'], true)
     },
     playerUnfinishedLap: function () {
       this.$emit('playerUnfinishedLap', this.player['.key'])

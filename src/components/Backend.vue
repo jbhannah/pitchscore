@@ -101,8 +101,8 @@ export default {
     deletePlayer: function (key) {
       this.$emit('deletePlayer', key)
     },
-    playerFinishedLap: function (key) {
-      this.$emit('playerFinishedLap', key)
+    playerFinishedLap: function (key, tied = false) {
+      this.$emit('playerFinishedLap', key, tied)
     },
     playerUnfinishedLap: function (key) {
       this.$emit('playerUnfinishedLap', key)
