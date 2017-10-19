@@ -74,7 +74,8 @@ export default {
       blankPlayer,
       carColors,
       newPlayer: Object.assign({}, blankPlayer),
-      stickerColors
+      stickerColors,
+      triedAddPlayer: false
     }
   },
   props: {
@@ -84,18 +85,27 @@ export default {
     }
   },
   computed: {
+    isValid: function () {
+      const validation = this.validation
+      return Object.keys(validation).every((key) => validation[key])
+    },
     validation: function () {
       return {
-        name: !!this.newPlayer.name.trim() || (!this.newPlayer.carColor.trim() && !this.newPlayer.stickerColor.trim()),
-        carColor: !!this.newPlayer.carColor.trim() || (!this.newPlayer.name.trim() && !this.newPlayer.stickerColor.trim()),
-        stickerColor: !!this.newPlayer.stickerColor.trim() || (!this.newPlayer.name.trim() && !this.newPlayer.carColor.trim())
+        name: !!this.newPlayer.name.trim() || (!this.newPlayer.carColor.trim() && !this.newPlayer.stickerColor.trim() && !this.triedAddPlayer),
+        carColor: !!this.newPlayer.carColor.trim() || (!this.newPlayer.name.trim() && !this.newPlayer.stickerColor.trim() && !this.triedAddPlayer),
+        stickerColor: !!this.newPlayer.stickerColor.trim() || (!this.newPlayer.name.trim() && !this.newPlayer.carColor.trim() && !this.triedAddPlayer)
       }
     }
   },
   methods: {
     addPlayer: function () {
+      this.triedAddPlayer = true
+      if (!this.isValid) { return }
+
       this.$emit('addPlayer', this.newPlayer)
       this.newPlayer = Object.assign({}, this.blankPlayer)
+      this.triedAddPlayer = false
+
       document.getElementById('name').focus()
     },
     deletePlayer: function (key) {
