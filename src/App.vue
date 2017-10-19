@@ -56,8 +56,9 @@ export default {
       const lap = laps.length
       const place = Math.max(...this.players.map((p) => (p.laps || [])[lap] || 0)) + (tied ? 0 : 1)
 
-      laps.push(place)
+      if (place === 0) { return }
 
+      laps.push(place)
       playersRef.child(key).update({ laps })
     },
     playerUnfinishedLap: function (key) {
@@ -72,8 +73,11 @@ export default {
 
       this.players.forEach((player) => {
         if (player['.key'] === key || (player.laps || []).length <= lap || player.laps[lap] < place) { return }
+
         let laps = player.laps
         laps[lap] = laps[lap] - 1
+        if (laps[lap] === 0) { return }
+
         playersRef.child(player['.key']).update({ laps })
       })
     },
