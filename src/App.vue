@@ -122,4 +122,8 @@ header a {
 header .router-link-active {
   font-weight: 600;
 }
+
+table {
+  border-spacing: 0;
+}
 </style>

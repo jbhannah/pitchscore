@@ -5,18 +5,20 @@
         <Vector class="sticker" :src="require('@/assets/sticker.svg')" :class="player.stickerColor" />
       </span>
     </td>
-    <td>
+    <td class="name" :class="{ completed: (player.laps || []).length === 3 }">
       {{ player.name }}
     </td>
     <td v-if="hasButtons">
-      <button type="button" v-if="hasButtons" v-on:click="deletePlayer">🚫</button>
+      <button type="button" v-on:click="deletePlayer">🚫</button>
     </td>
     <td v-if="hasButtons">
-      <button type="button" v-if="hasButtons && (player.laps || []).length > 0" v-on:click="playerUnfinishedLap">⏪</button>
+      <button type="button" v-if="(player.laps || []).length > 0" v-on:click="playerUnfinishedLap">⏪</button>
     </td>
-    <td v-for="pos in player.laps">{{ pos }}</td>
-    <td v-if="hasButtons">
-      <button type="button" v-if="hasButtons && (player.laps || []).length < 3" v-on:click="playerFinishedLap">⏩</button>
+    <td class="lap" v-if="hasButtons || n > 1" v-for="n in 3">
+      {{ (player.laps || [])[n - 1] }}
+    </td>
+    <td v-if="hasButtons && (player.laps || []).length < 3">
+      <button type="button" v-on:click="playerFinishedLap">⏩</button>
     </td>
   </tr>
 </template>
@@ -51,9 +53,30 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+tbody tr:nth-of-type(odd) {
+  background-color: #eee;
+}
+
 td {
   min-width: 2rem;
+  padding: 3px;
+}
+
+td.name {
+  font-weight: bold;
+}
+
+td.name.completed {
+  text-decoration: line-through;
+}
+
+td.lap {
+  text-align: center;
+}
+
+td.lap:last-child {
+  font-weight: bold;
 }
 
 .puck {

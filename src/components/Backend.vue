@@ -3,14 +3,24 @@
     <h1>Backend</h1>
 
     <table>
-      <Player
-        v-for="player in players"
-        v-on:deletePlayer="deletePlayer"
-        v-on:playerFinishedLap="playerFinishedLap"
-        v-on:playerUnfinishedLap="playerUnfinishedLap"
-        :has-buttons="true"
-        :key="player['.key']"
-        :player="player" />
+      <thead>
+        <tr>
+          <th colspan="4"></th>
+          <th>Q</th>
+          <th>1</th>
+          <th>2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <Player
+          v-for="player in players"
+          v-on:deletePlayer="deletePlayer"
+          v-on:playerFinishedLap="playerFinishedLap"
+          v-on:playerUnfinishedLap="playerUnfinishedLap"
+          :has-buttons="true"
+          :key="player['.key']"
+          :player="player" />
+      </tbody>
     </table>
 
     <form id="addPlayer" v-on:submit.prevent="addPlayer">
@@ -106,7 +116,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .error {
   border: 1px solid red;
 }

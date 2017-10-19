@@ -1,7 +1,16 @@
 <template>
   <div id="frontend">
     <table>
-      <Player v-for="player in sortedPlayers" :key="player['.key']" :player="player" />
+      <thead>
+        <tr>
+          <th colspan="2"></th>
+          <th>Lap 1</th>
+          <th>Lap 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <Player v-for="player in sortedPlayers" :key="player['.key']" :player="player" />
+      </tbody>
     </table>
   </div>
 </template>
@@ -28,5 +37,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+tr {
+  font-size: 1.2rem;
+}
 </style>
