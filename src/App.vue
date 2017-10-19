@@ -20,7 +20,10 @@
 import Firebase from 'firebase'
 
 const config = {
-  databaseURL: 'https://pitch-score.firebaseio.com'
+  apiKey: 'AIzaSyCXfj1ky7sXgfyvwXGy-zvo0_ErenC-tVo',
+  authDomain: 'pitchscore-ade8c.firebaseapp.com',
+  databaseURL: 'https://pitchscore-ade8c.firebaseio.com',
+  projectId: 'pitchscore-ade8c'
 }
 
 const app = Firebase.initializeApp(config)
