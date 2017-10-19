@@ -13,7 +13,7 @@
       </thead>
       <tbody>
         <Player
-          v-for="player in players"
+          v-for="player in sortedPlayers"
           v-on:deletePlayer="deletePlayer"
           v-on:playerFinishedLap="playerFinishedLap"
           v-on:playerUnfinishedLap="playerUnfinishedLap"
@@ -88,6 +88,21 @@ export default {
     isValid: function () {
       const validation = this.validation
       return Object.keys(validation).every((key) => validation[key])
+    },
+    sortedPlayers: function () {
+      let players = this.players
+      players.sort((a, b) => {
+        if ((a.laps || []).length > 0 || (b.laps || []).length > 0) {
+          return ((a.laps || [])[0] || this.players.length) - ((b.laps || [])[0] || this.players.length)
+        } else if (a.name < b.name) {
+          return -1
+        } else if (a.name > b.name) {
+          return 1
+        } else {
+          return 0
+        }
+      })
+      return players
     },
     validation: function () {
       return {
