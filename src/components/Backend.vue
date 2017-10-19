@@ -14,11 +14,13 @@
     </table>
 
     <form id="addPlayer" v-on:submit.prevent="addPlayer">
-      <input type="text" id="name" placeholder="Name" v-model="newPlayer.name" :class="{ error: !validation.name }" />
-      <select v-model="newPlayer.carColor" :class="{ error: !validation.carColor }">
+      <input id="name" placeholder="Name" type="text" v-model="newPlayer.name" :class="{ error: !validation.name }" />
+      <label for="carColor">Car</label>
+      <select id="carColor" v-model="newPlayer.carColor" :class="{ error: !validation.carColor }">
         <option v-for="carColor in carColors" :value="carColor">{{ carColor[0].toUpperCase() + carColor.slice(1) }}</option>
       </select>
-      <select v-model="newPlayer.stickerColor" :class="{ error: !validation.stickerColor }">
+      <label for="stickerColor">Sticker</label>
+      <select for="stickerColor" v-model="newPlayer.stickerColor" :class="{ error: !validation.stickerColor }">
         <option v-for="stickerColor in stickerColors" :value="stickerColor">{{ stickerColor[0].toUpperCase() + stickerColor.slice(1) }}</option>
       </select>
       <button type="submit">Add</button>
