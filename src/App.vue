@@ -89,7 +89,9 @@ export default {
       })
     },
     resetData: function () {
-      playersRef.set([])
+      this.players.forEach((player) => {
+        playersRef.child(player['.key']).update({ laps: [] })
+      })
     }
   }
 }
