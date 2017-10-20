@@ -1,6 +1,6 @@
 {
-  "name": "pitchscore",
-  "short_name": "pitchscore",
+  "name": "PitchScore",
+  "short_name": "PitchScore",
   "icons": [
     {
       "src": "/static/img/icons/android-chrome-192x192.png",
