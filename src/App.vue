@@ -6,7 +6,7 @@
     </header>
     <main>
       <router-view
-        v-on:addPlayer="addPlayer"
+        v-on:addOrSavePlayer="addOrSavePlayer"
         v-on:deletePlayer="deletePlayer"
         v-on:playerFinishedLap="playerFinishedLap"
         v-on:playerUnfinishedLap="playerUnfinishedLap"
@@ -39,8 +39,15 @@ export default {
     findPlayerByKey: function (key) {
       return this.players.find((p) => p['.key'] === key)
     },
-    addPlayer: function (newPlayer) {
-      playersRef.push(newPlayer)
+    addOrSavePlayer: function (newPlayer) {
+      const key = newPlayer['.key']
+      delete newPlayer['.key']
+
+      if (typeof key === 'undefined') {
+        playersRef.push(newPlayer)
+      } else {
+        playersRef.child(key).update(newPlayer)
+      }
     },
     deletePlayer: function (key) {
       const player = this.findPlayerByKey(key)

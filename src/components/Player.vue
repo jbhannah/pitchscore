@@ -9,6 +9,7 @@
       {{ player.name }}
     </td>
     <td v-if="hasButtons">
+      <button type="button" v-on:click="editPlayer">✏️</button>
       <button type="button" v-on:click="deletePlayer">🚫</button>
     </td>
     <td v-if="hasButtons">
@@ -42,6 +43,14 @@ export default {
   methods: {
     deletePlayer: function () {
       this.$emit('deletePlayer', this.player['.key'])
+    },
+    editPlayer: function () {
+      this.$emit('editPlayer', {
+        '.key': this.player['.key'],
+        name: this.player.name,
+        carColor: this.player.carColor,
+        stickerColor: this.player.stickerColor
+      })
     },
     playerFinishedLap: function () {
       this.$emit('playerFinishedLap', this.player['.key'])

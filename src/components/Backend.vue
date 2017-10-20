@@ -15,6 +15,7 @@
         <Player
           v-for="player in sortedPlayers"
           v-on:deletePlayer="deletePlayer"
+          v-on:editPlayer="editPlayer"
           v-on:playerFinishedLap="playerFinishedLap"
           v-on:playerUnfinishedLap="playerUnfinishedLap"
           :has-buttons="true"
@@ -23,7 +24,7 @@
       </tbody>
     </table>
 
-    <form id="addPlayer" v-on:submit.prevent="addPlayer">
+    <form v-on:submit.prevent="addOrSavePlayer">
       <input id="name" placeholder="Name" type="text" v-model="newPlayer.name" :class="{ error: !validation.name }" />
       <label for="carColor">Car</label>
       <select id="carColor" v-model="newPlayer.carColor" :class="{ error: !validation.carColor }">
@@ -33,7 +34,8 @@
       <select for="stickerColor" v-model="newPlayer.stickerColor" :class="{ error: !validation.stickerColor }">
         <option v-for="stickerColor in stickerColors" :value="stickerColor">{{ stickerColor[0].toUpperCase() + stickerColor.slice(1) }}</option>
       </select>
-      <button type="submit">Add</button>
+      <button type="submit">{{ newPlayer.hasOwnProperty('.key') ? 'Save' : 'Add' }}</button>
+      <button type="reset" v-on:click="resetNewPlayer">Cancel</button>
     </form>
 
     <button type="button" v-on:click="resetData">Reset Data</button>
@@ -113,18 +115,21 @@ export default {
     }
   },
   methods: {
-    addPlayer: function () {
+    addOrSavePlayer: function () {
       this.triedAddPlayer = true
       if (!this.isValid) { return }
 
-      this.$emit('addPlayer', this.newPlayer)
-      this.newPlayer = Object.assign({}, this.blankPlayer)
+      this.$emit('addOrSavePlayer', this.newPlayer)
       this.triedAddPlayer = false
+      this.resetNewPlayer()
 
       document.getElementById('name').focus()
     },
     deletePlayer: function (key) {
       this.$emit('deletePlayer', key)
+    },
+    editPlayer: function (player) {
+      this.newPlayer = Object.assign({}, player)
     },
     playerFinishedLap: function (key, tied = false) {
       this.$emit('playerFinishedLap', key, tied)
@@ -135,6 +140,9 @@ export default {
     resetData: function () {
       if (!confirm('Are you sure?')) { return }
       this.$emit('resetData')
+    },
+    resetNewPlayer: function () {
+      this.newPlayer = Object.assign({}, this.blankPlayer)
     }
   },
   components: { Player }
