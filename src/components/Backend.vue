@@ -61,6 +61,7 @@ const carColors = [
 const stickerColors = [
   'black',
   'pink',
+  'silver',
   'white'
 ]
 

@@ -118,7 +118,8 @@ td.lap:last-child {
   margin-left: 15%;
 }
 
-.sticker.black path { fill: black; }
-.sticker.pink  path { fill: hotpink; }
-.sticker.white path { fill: white; }
+.sticker.black  path { fill: black; }
+.sticker.pink   path { fill: fuchsia; }
+.sticker.silver path { fill: lightgray; }
+.sticker.white  path { fill: white; }
 </style>
