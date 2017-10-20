@@ -5,7 +5,7 @@
         <Vector class="sticker" :src="require('@/assets/sticker.svg')" :class="player.stickerColor" />
       </span>
     </td>
-    <td class="name" :class="{ completed: (player.laps || []).length === 3 }">
+    <td class="name" :class="{ completed: (player.laps || []).length === lapCount + 1 }">
       {{ player.name }}
     </td>
     <td v-if="hasButtons">
@@ -15,10 +15,10 @@
     <td v-if="hasButtons">
       <button type="button" @click="playerUnfinishedLap" v-if="(player.laps || []).length > 0">⏪</button>
     </td>
-    <td class="lap" v-if="hasButtons || n > 1" v-for="n in 3">
-      {{ (player.laps || [])[n - 1] }}
+    <td class="lap" v-if="hasButtons || lap > 1" v-for="lap in (lapCount + 1)">
+      {{ (player.laps || [])[lap - 1] }}
     </td>
-    <td v-if="hasButtons && (player.laps || []).length < 3">
+    <td v-if="hasButtons && (player.laps || []).length <= lapCount">
       <button type="button" @click="playerFinishedLap">⏩</button>
       <button type="button" @click="playerTiedLap" v-if="(player.laps || []).length > 0">🔀</button>
     </td>
@@ -31,13 +31,17 @@ import Vector from '@/components/Vector'
 export default {
   name: 'player',
   props: {
-    player: {
-      type: Object,
-      required: true
-    },
     hasButtons: {
       type: Boolean,
       default: false
+    },
+    lapCount: {
+      type: Number,
+      required: true
+    },
+    player: {
+      type: Object,
+      required: true
     }
   },
   methods: {

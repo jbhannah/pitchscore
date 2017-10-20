@@ -7,8 +7,7 @@
         <tr>
           <th colspan="4"></th>
           <th>Q</th>
-          <th>1</th>
-          <th>2</th>
+          <th v-for="lap in lapCount">{{ lap }}</th>
         </tr>
       </thead>
       <tbody>
@@ -19,6 +18,7 @@
           @playerFinishedLap="playerFinishedLap"
           @playerUnfinishedLap="playerUnfinishedLap"
           :has-buttons="true"
+          :lapCount="lapCount"
           :key="player['.key']"
           :player="player" />
       </tbody>
@@ -38,6 +38,8 @@
       <button type="reset" @click="resetNewPlayer">Cancel</button>
     </form>
 
+    <label for="lapCount">Laps</label>
+    <input id="lapCount" type="number" min="1" v-model="mutableLapCount" />
     <button type="button" @click="resetData">Reset Data</button>
   </div>
 </template>
@@ -81,6 +83,10 @@ export default {
     }
   },
   props: {
+    lapCount: {
+      type: Number,
+      required: true
+    },
     players: {
       type: Array,
       required: true
@@ -90,6 +96,14 @@ export default {
     isValid: function () {
       const validation = this.validation
       return Object.keys(validation).every((key) => validation[key])
+    },
+    mutableLapCount: {
+      get: function () {
+        return this.lapCount
+      },
+      set: function (lapCount) {
+        this.$emit('setLapCount', parseInt(lapCount))
+      }
     },
     sortedPlayers: function () {
       let players = this.players

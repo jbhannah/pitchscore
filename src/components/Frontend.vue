@@ -3,13 +3,13 @@
     <table>
       <thead>
         <tr>
-          <th colspan="2"></th>
-          <th>Lap 1</th>
-          <th>Lap 2</th>
+          <th></th>
+          <th>Lap</th>
+          <th v-for="lap in lapCount">{{ lap }}</th>
         </tr>
       </thead>
       <tbody>
-        <Player v-for="player in sortedPlayers" :key="player['.key']" :player="player" />
+        <Player v-for="player in sortedPlayers" :key="player['.key']" :lapCount="lapCount" :player="player" />
       </tbody>
     </table>
   </div>
@@ -21,6 +21,10 @@ import Player from '@/components/Player'
 export default {
   name: 'frontend',
   props: {
+    lapCount: {
+      type: Number,
+      required: true
+    },
     players: {
       type: Array,
       required: true

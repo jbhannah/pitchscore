@@ -11,6 +11,8 @@
         @playerFinishedLap="playerFinishedLap"
         @playerUnfinishedLap="playerUnfinishedLap"
         @resetData="resetData"
+        @setLapCount="setLapCount"
+        :lapCount="lapCount['.value'] || 0"
         :players="players" />
     </main>
   </div>
@@ -29,10 +31,17 @@ const config = {
 const app = Firebase.initializeApp(config)
 const db = app.database()
 const playersRef = db.ref('players')
+const lapCountRef = db.ref('lapCount')
+
+const defaultLapCount = 2
 
 export default {
   name: 'app',
   firebase: {
+    lapCount: {
+      source: lapCountRef,
+      asObject: true
+    },
     players: playersRef
   },
   methods: {
@@ -92,6 +101,10 @@ export default {
       this.players.forEach((player) => {
         playersRef.child(player['.key']).update({ laps: [] })
       })
+      this.setLapCount(defaultLapCount)
+    },
+    setLapCount: function (lapCount) {
+      lapCountRef.set(lapCount)
     }
   }
 }
