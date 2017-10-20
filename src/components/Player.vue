@@ -108,7 +108,7 @@ td.lap:last-child {
 .puck.green  { background-color: green; }
 .puck.orange { background-color: darkorange; }
 .puck.pink   { background-color: lightpink; }
-.puck.red    { background-color: red; }
+.puck.red    { background-color: firebrick; }
 .puck.yellow { background-color: gold; }
 .puck.white  { background-color: antiquewhite; }
 
