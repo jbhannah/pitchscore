@@ -46,7 +46,9 @@ export default {
   },
   methods: {
     deletePlayer: function () {
-      this.$emit('deletePlayer', this.player['.key'])
+      if (confirm('Are you sure?')) {
+        this.$emit('deletePlayer', this.player['.key'])
+      }
     },
     editPlayer: function () {
       this.$emit('editPlayer', {

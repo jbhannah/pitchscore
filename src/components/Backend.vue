@@ -153,8 +153,7 @@ export default {
       this.$emit('playerUnfinishedLap', key)
     },
     resetData: function () {
-      if (!confirm('Are you sure?')) { return }
-      this.$emit('resetData')
+      if (confirm('Are you sure?')) { this.$emit('resetData') }
     },
     resetNewPlayer: function () {
       this.newPlayer = Object.assign({}, this.blankPlayer)
