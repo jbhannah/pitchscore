@@ -6,11 +6,11 @@
     </header>
     <main>
       <router-view
-        v-on:addOrSavePlayer="addOrSavePlayer"
-        v-on:deletePlayer="deletePlayer"
-        v-on:playerFinishedLap="playerFinishedLap"
-        v-on:playerUnfinishedLap="playerUnfinishedLap"
-        v-on:resetData="resetData"
+        @addOrSavePlayer="addOrSavePlayer"
+        @deletePlayer="deletePlayer"
+        @playerFinishedLap="playerFinishedLap"
+        @playerUnfinishedLap="playerUnfinishedLap"
+        @resetData="resetData"
         :players="players" />
     </main>
   </div>

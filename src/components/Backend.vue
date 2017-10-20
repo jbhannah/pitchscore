@@ -14,17 +14,17 @@
       <tbody>
         <Player
           v-for="player in sortedPlayers"
-          v-on:deletePlayer="deletePlayer"
-          v-on:editPlayer="editPlayer"
-          v-on:playerFinishedLap="playerFinishedLap"
-          v-on:playerUnfinishedLap="playerUnfinishedLap"
+          @deletePlayer="deletePlayer"
+          @editPlayer="editPlayer"
+          @playerFinishedLap="playerFinishedLap"
+          @playerUnfinishedLap="playerUnfinishedLap"
           :has-buttons="true"
           :key="player['.key']"
           :player="player" />
       </tbody>
     </table>
 
-    <form v-on:submit.prevent="addOrSavePlayer">
+    <form @submit.prevent="addOrSavePlayer">
       <input id="name" placeholder="Name" type="text" v-model="newPlayer.name" :class="{ error: !validation.name }" />
       <label for="carColor">Car</label>
       <select id="carColor" v-model="newPlayer.carColor" :class="{ error: !validation.carColor }">
@@ -35,10 +35,10 @@
         <option v-for="stickerColor in stickerColors" :value="stickerColor">{{ stickerColor[0].toUpperCase() + stickerColor.slice(1) }}</option>
       </select>
       <button type="submit">{{ newPlayer.hasOwnProperty('.key') ? 'Save' : 'Add' }}</button>
-      <button type="reset" v-on:click="resetNewPlayer">Cancel</button>
+      <button type="reset" @click="resetNewPlayer">Cancel</button>
     </form>
 
-    <button type="button" v-on:click="resetData">Reset Data</button>
+    <button type="button" @click="resetData">Reset Data</button>
   </div>
 </template>
 

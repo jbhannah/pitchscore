@@ -9,18 +9,18 @@
       {{ player.name }}
     </td>
     <td v-if="hasButtons">
-      <button type="button" v-on:click="editPlayer">✏️</button>
-      <button type="button" v-on:click="deletePlayer">🚫</button>
+      <button type="button" @click="editPlayer">✏️</button>
+      <button type="button" @click="deletePlayer">🚫</button>
     </td>
     <td v-if="hasButtons">
-      <button type="button" v-if="(player.laps || []).length > 0" v-on:click="playerUnfinishedLap">⏪</button>
+      <button type="button" @click="playerUnfinishedLap" v-if="(player.laps || []).length > 0">⏪</button>
     </td>
     <td class="lap" v-if="hasButtons || n > 1" v-for="n in 3">
       {{ (player.laps || [])[n - 1] }}
     </td>
     <td v-if="hasButtons && (player.laps || []).length < 3">
-      <button type="button" v-on:click="playerFinishedLap">⏩</button>
-      <button type="button" v-on:click="playerTiedLap" v-if="(player.laps || []).length > 0">🔀</button>
+      <button type="button" @click="playerFinishedLap">⏩</button>
+      <button type="button" @click="playerTiedLap" v-if="(player.laps || []).length > 0">🔀</button>
     </td>
   </tr>
 </template>
