@@ -40,7 +40,7 @@
 
     <label for="lapCount">Laps</label>
     <input id="lapCount" type="number" min="1" v-model="mutableLapCount" />
-    <button type="button" @click="resetData">Reset Data</button>
+    <button type="button" @click="resetLaps">Reset Laps</button>
   </div>
 </template>
 
@@ -152,8 +152,8 @@ export default {
     playerUnfinishedLap: function (key) {
       this.$emit('playerUnfinishedLap', key)
     },
-    resetData: function () {
-      if (confirm('Are you sure?')) { this.$emit('resetData') }
+    resetLaps: function () {
+      if (confirm('Are you sure?')) { this.$emit('resetLaps') }
     },
     resetNewPlayer: function () {
       this.newPlayer = Object.assign({}, this.blankPlayer)

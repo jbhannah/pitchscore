@@ -10,7 +10,7 @@
         @deletePlayer="deletePlayer"
         @playerFinishedLap="playerFinishedLap"
         @playerUnfinishedLap="playerUnfinishedLap"
-        @resetData="resetData"
+        @resetLaps="resetLaps"
         @setLapCount="setLapCount"
         :lapCount="lapCount['.value'] || 0"
         :players="players" />
@@ -97,7 +97,7 @@ export default {
         playersRef.child(player['.key']).update({ laps })
       })
     },
-    resetData: function () {
+    resetLaps: function () {
       this.players.forEach((player) => {
         playersRef.child(player['.key']).update({ laps: [] })
       })
