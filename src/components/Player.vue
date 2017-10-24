@@ -74,7 +74,7 @@ export default {
 
 <style>
 tbody tr:nth-of-type(odd) {
-  background-color: #eee;
+  background-color: #f6f6f6;
 }
 
 td {
@@ -109,7 +109,7 @@ td.lap:last-child {
 .puck.blue   { background-color: mediumblue; }
 .puck.green  { background-color: green; }
 .puck.orange { background-color: darkorange; }
-.puck.pink   { background-color: lightpink; }
+.puck.pink   { background-color: hotpink; }
 .puck.red    { background-color: firebrick; }
 .puck.yellow { background-color: gold; }
 .puck.white  { background-color: antiquewhite; }
