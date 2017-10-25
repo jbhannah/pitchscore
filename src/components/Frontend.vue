@@ -1,6 +1,7 @@
 <template>
   <div id="frontend">
-    <table>
+    <span v-if="sortedPlayers.length === 0">Waiting for players…</span>
+    <table v-if="sortedPlayers.length > 0">
       <thead>
         <tr>
           <th></th>
@@ -41,8 +42,8 @@ export default {
 }
 </script>
 
-<style scoped>
-tr {
+<style>
+#frontend {
   font-size: 1.2rem;
 }
 </style>
