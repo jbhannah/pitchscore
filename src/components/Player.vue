@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     deletePlayer: function () {
-      if (confirm('Are you sure?')) {
+      if (confirm('Really delete player?')) {
         this.$emit('deletePlayer', this.player['.key'])
       }
     },
@@ -65,7 +65,9 @@ export default {
       this.$emit('playerFinishedLap', this.player['.key'], true)
     },
     playerUnfinishedLap: function () {
-      this.$emit('playerUnfinishedLap', this.player['.key'])
+      if (confirm('Really undo lap finish?')) {
+        this.$emit('playerUnfinishedLap', this.player['.key'])
+      }
     }
   },
   components: { Vector }
