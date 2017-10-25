@@ -6,7 +6,7 @@
       </span>
     </td>
     <td class="name" :class="{ completed: (player.laps || []).length === lapCount + 1 }">
-      {{ player.name }}
+      {{ player.name | capitalize }}
     </td>
     <td v-if="hasButtons">
       <button type="button" @click="editPlayer">✏️</button>
@@ -27,6 +27,7 @@
 
 <script>
 import Vector from '@/components/Vector'
+import { capitalize } from '@/util/filters'
 
 export default {
   name: 'player',
@@ -70,7 +71,8 @@ export default {
       }
     }
   },
-  components: { Vector }
+  components: { Vector },
+  filters: { capitalize }
 }
 </script>
 

@@ -28,11 +28,11 @@
       <input id="name" placeholder="Name" type="text" required v-model="newPlayer.name" />
       <label for="carColor">Car</label>
       <select id="carColor" required v-model="newPlayer.carColor">
-        <option v-for="carColor in carColors" :value="carColor">{{ carColor[0].toUpperCase() + carColor.slice(1) }}</option>
+        <option v-for="carColor in carColors" :value="carColor">{{ carColor | capitalize }}</option>
       </select>
       <label for="stickerColor">Sticker</label>
       <select for="stickerColor" required v-model="newPlayer.stickerColor">
-        <option v-for="stickerColor in stickerColors" :value="stickerColor">{{ stickerColor[0].toUpperCase() + stickerColor.slice(1) }}</option>
+        <option v-for="stickerColor in stickerColors" :value="stickerColor">{{ stickerColor | capitalize }}</option>
       </select>
       <button type="submit">{{ newPlayer.hasOwnProperty('.key') ? 'Save' : 'Add' }}</button>
       <button type="reset" @click="resetNewPlayer">Cancel</button>
@@ -46,6 +46,7 @@
 
 <script>
 import Player from '@/components/Player'
+import { capitalize } from '@/util/filters'
 
 const carColors = [
   'black',
@@ -144,7 +145,8 @@ export default {
       this.newPlayer = Object.assign({}, this.blankPlayer)
     }
   },
-  components: { Player }
+  components: { Player },
+  filters: { capitalize }
 }
 </script>
 
