@@ -20,7 +20,7 @@
     </td>
     <td v-if="hasButtons && (player.laps || []).length <= lapCount">
       <button type="button" @click="playerFinishedLap">⏩</button>
-      <button type="button" @click="playerTiedLap" v-if="(player.laps || []).length > 0">🔀</button>
+      <button type="button" v-if="(player.laps || []).length > 0" @click="playerTiedLap">🔀</button>
     </td>
   </tr>
 </template>

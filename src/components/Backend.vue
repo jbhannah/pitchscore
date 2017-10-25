@@ -17,7 +17,7 @@
           @editPlayer="editPlayer"
           @playerFinishedLap="playerFinishedLap"
           @playerUnfinishedLap="playerUnfinishedLap"
-          :has-buttons="true"
+          :hasButtons="true"
           :lapCount="lapCount"
           :key="player['.key']"
           :player="player" />
