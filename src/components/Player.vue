@@ -115,8 +115,8 @@ td.lap:last-child {
 .puck.orange { background-color: darkorange; }
 .puck.pink   { background-color: hotpink; }
 .puck.red    { background-color: firebrick; }
-.puck.yellow { background-color: gold; }
 .puck.white  { background-color: antiquewhite; }
+.puck.yellow { background-color: gold; }
 
 .sticker {
   width: 70%;

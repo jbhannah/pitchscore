@@ -55,8 +55,8 @@ const carColors = [
   'orange',
   'pink',
   'red',
-  'yellow',
-  'white'
+  'white',
+  'yellow'
 ]
 
 const stickerColors = [
