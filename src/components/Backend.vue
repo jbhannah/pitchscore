@@ -25,13 +25,13 @@
     </table>
 
     <form @submit.prevent="addOrSavePlayer">
-      <input id="name" placeholder="Name" type="text" v-model="newPlayer.name" :class="{ error: !validation.name }" />
+      <input id="name" placeholder="Name" type="text" required v-model="newPlayer.name" />
       <label for="carColor">Car</label>
-      <select id="carColor" v-model="newPlayer.carColor" :class="{ error: !validation.carColor }">
+      <select id="carColor" required v-model="newPlayer.carColor">
         <option v-for="carColor in carColors" :value="carColor">{{ carColor[0].toUpperCase() + carColor.slice(1) }}</option>
       </select>
       <label for="stickerColor">Sticker</label>
-      <select for="stickerColor" v-model="newPlayer.stickerColor" :class="{ error: !validation.stickerColor }">
+      <select for="stickerColor" required v-model="newPlayer.stickerColor">
         <option v-for="stickerColor in stickerColors" :value="stickerColor">{{ stickerColor[0].toUpperCase() + stickerColor.slice(1) }}</option>
       </select>
       <button type="submit">{{ newPlayer.hasOwnProperty('.key') ? 'Save' : 'Add' }}</button>
@@ -94,10 +94,6 @@ export default {
     }
   },
   computed: {
-    isValid: function () {
-      const validation = this.validation
-      return Object.keys(validation).every((key) => validation[key])
-    },
     mutableLapCount: {
       get: function () {
         return this.lapCount
@@ -120,22 +116,11 @@ export default {
         }
       })
       return players
-    },
-    validation: function () {
-      return {
-        name: !!this.newPlayer.name.trim() || (!this.newPlayer.carColor.trim() && !this.newPlayer.stickerColor.trim() && !this.triedAddPlayer),
-        carColor: !!this.newPlayer.carColor.trim() || (!this.newPlayer.name.trim() && !this.newPlayer.stickerColor.trim() && !this.triedAddPlayer),
-        stickerColor: !!this.newPlayer.stickerColor.trim() || (!this.newPlayer.name.trim() && !this.newPlayer.carColor.trim() && !this.triedAddPlayer)
-      }
     }
   },
   methods: {
     addOrSavePlayer: function () {
-      this.triedAddPlayer = true
-      if (!this.isValid) { return }
-
       this.$emit('addOrSavePlayer', this.newPlayer)
-      this.triedAddPlayer = false
       this.resetNewPlayer()
 
       document.getElementById('name').focus()
