@@ -4,8 +4,7 @@
     <table v-if="sortedPlayers.length > 0">
       <thead>
         <tr>
-          <th></th>
-          <th>Lap</th>
+          <th colspan="3">Lap</th>
           <th v-for="lap in lapCount">{{ lap }}</th>
         </tr>
       </thead>
@@ -33,9 +32,13 @@ export default {
   },
   computed: {
     sortedPlayers: function () {
-      return this.players
-        .filter((p) => (p.laps || []).length > 0)
-        .sort((a, b) => a.laps[0] - b.laps[0])
+      let players = this.players.filter(p => (p.laps || []).length > 0)
+
+      if (players.every(p => p.laps.length === this.lapCount + 1)) {
+        return players.sort((a, b) => a.laps[this.lapCount] - b.laps[this.lapCount])
+      }
+
+      return players.sort((a, b) => a.laps[0] - b.laps[0])
     }
   },
   components: { Player }

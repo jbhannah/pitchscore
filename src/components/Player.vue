@@ -1,5 +1,8 @@
 <template>
   <tr class="player">
+    <td v-if="!hasButtons">
+      {{ (player.laps || [])[0] }}
+    </td>
     <td>
       <span class="puck" :class="player.carColor">
         <Vector class="sticker" :src="require('@/assets/sticker.svg')" :class="player.stickerColor" />
