@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     findPlayerByKey: function (key) {
-      return this.players.find((p) => p['.key'] === key)
+      return this.players.find(p => p['.key'] === key)
     },
     addOrSavePlayer: function (newPlayer) {
       const key = newPlayer['.key']
@@ -70,7 +70,7 @@ export default {
       const player = this.findPlayerByKey(key)
       let laps = player.laps || []
       const lap = laps.length
-      const place = Math.max(...this.players.map((p) => (p.laps || [])[lap] || 0)) + (tied ? 0 : 1)
+      const place = Math.max(...this.players.map(p => (p.laps || [])[lap] || 0)) + (tied ? 0 : 1)
 
       if (place === 0) return
 
@@ -85,7 +85,7 @@ export default {
       const lap = laps.length
       playersRef.child(key).update({ laps })
 
-      if (this.players.find((p) => (p.laps || [])[lap] === place)) return
+      if (this.players.find(p => (p.laps || [])[lap] === place)) return
 
       this.players.forEach((player) => {
         if (player['.key'] === key || (player.laps || []).length <= lap || player.laps[lap] < place) return
