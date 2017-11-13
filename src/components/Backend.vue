@@ -46,7 +46,7 @@
 
 <script>
 import Player from '@/components/Player'
-import { capitalize } from '@/util/filters'
+import { capitalize, trim } from '@/util/filters'
 
 const carColors = [
   'black',
@@ -121,6 +121,8 @@ export default {
   },
   methods: {
     addOrSavePlayer: function () {
+      const name = this.newPlayer.name
+      this.newPlayer.name = capitalize(trim(name))
       this.$emit('addOrSavePlayer', this.newPlayer)
       this.resetNewPlayer()
 
