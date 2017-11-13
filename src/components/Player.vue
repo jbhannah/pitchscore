@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     deletePlayer: function () {
-      if (confirm('Really delete player?')) {
+      if (confirm(`Really delete ${capitalize(trim(this.player.name))}?`)) {
         this.$emit('deletePlayer', this.player['.key'])
       }
     },
@@ -69,7 +69,7 @@ export default {
       this.$emit('playerFinishedLap', this.player['.key'], true)
     },
     playerUnfinishedLap: function () {
-      if (confirm('Really undo lap finish?')) {
+      if (confirm(`Really undo lap finish for ${capitalize(trim(this.player.name))}?`)) {
         this.$emit('playerUnfinishedLap', this.player['.key'])
       }
     }
