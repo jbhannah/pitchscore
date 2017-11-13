@@ -87,20 +87,18 @@ export default {
 
       if (this.players.find(p => (p.laps || [])[lap] === place)) return
 
-      this.players.forEach((player) => {
-        if (player['.key'] === key || (player.laps || []).length <= lap || player.laps[lap] < place) return
+      this.players.forEach(p => {
+        if (p['.key'] === key || (p.laps || []).length <= lap || p.laps[lap] < place) return
 
-        let laps = player.laps
+        let laps = p.laps
         laps[lap] = laps[lap] - 1
         if (laps[lap] === 0) return
 
-        playersRef.child(player['.key']).update({ laps })
+        playersRef.child(p['.key']).update({ laps })
       })
     },
     resetLaps: function () {
-      this.players.forEach((player) => {
-        playersRef.child(player['.key']).update({ laps: [] })
-      })
+      this.players.forEach(p => playersRef.child(p['.key']).update({ laps: [] }))
       this.setLapCount(defaultLapCount)
     },
     setLapCount: function (lapCount) {
