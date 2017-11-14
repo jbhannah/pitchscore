@@ -5,6 +5,11 @@ if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
 
+var FirebaseServer = require('firebase-server')
+new FirebaseServer(config.dev.env.FIREBASE_PORT, 'firebase.test.local', {
+  lapCount: 2
+})
+
 var opn = require('opn')
 var path = require('path')
 var express = require('express')
