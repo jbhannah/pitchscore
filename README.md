@@ -1,5 +1,7 @@
 # pitchscore
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jbhannah/pitchscore.svg)](https://greenkeeper.io/)
+
 > A scoreboard for Pitchcar
 
 ## Build Setup
