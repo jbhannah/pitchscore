@@ -21,14 +21,7 @@
 <script>
 import Firebase from 'firebase'
 
-const config = {
-  apiKey: 'AIzaSyCXfj1ky7sXgfyvwXGy-zvo0_ErenC-tVo',
-  authDomain: 'pitchscore-ade8c.firebaseapp.com',
-  databaseURL: 'https://pitchscore-ade8c.firebaseio.com',
-  projectId: 'pitchscore-ade8c'
-}
-
-const app = Firebase.initializeApp(config)
+const app = Firebase.initializeApp(process.env.FIREBASE_CONFIG)
 const db = app.database()
 const playersRef = db.ref('players')
 const lapCountRef = db.ref('lapCount')
